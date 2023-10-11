@@ -1,0 +1,35 @@
+
+
+/*
+ * The following works on tablet-size and up per bulma responsiveness
+   769px + width
+
+   TODO: Create versions for mobile
+ */
+
+.fullheight { /* body tag & page container */
+    min-height: 100vh;
+}
+
+.fullheight-minus-footer { /* body container */
+
+    min-height: calc(100vh - 8.5em); /* leave space for footer */
+
+    /* tablet and up */
+    @media screen and (min-width: 769px) {
+        min-height: calc(100vh - 3.5em);
+    }
+}
+
+.camp-footer { /* footer */
+
+    bottom: 0;
+    min-height: 8em;
+    width: 100%;
+    margin-left: 0;
+
+    /* tablet and up */
+    @media screen and (min-width: 769px) {
+        min-height: 3em;
+    }
+}
