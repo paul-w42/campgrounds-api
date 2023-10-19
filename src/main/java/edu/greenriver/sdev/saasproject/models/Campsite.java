@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
  * This class represents a campsite object.  A campground contains from 1 to n campsites
  *
  * @author Paul Woods
+ * @version 0.1
  */
 @Entity
 @Data
@@ -28,6 +29,11 @@ public class Campsite {
     private int maxTrailerLength;   // 0 = no trailer/rv allowed
     private boolean tentPadPresent;
 
+    /**
+     * Constructor for the Campsite model class, it takes in a required String
+     * value representing the Campsites site-number.
+     * @param campsiteNumber String value indicating campsite number
+     */
     public Campsite(String campsiteNumber)
     {
         this.campsiteNumber = campsiteNumber;

@@ -5,11 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * This class represents a Campground object.  It includes a name, website url,
  * location, and information on campsites.
+ *
+ * @author Paul Woods
+ * @version 0.1
  */
 @Entity
 @Data
@@ -28,14 +29,22 @@ public class Campground {
     private int tentOnlySites;      // number of tent-only sites
     private int totalCampsites;     // number of total campsites
 
+    /**
+     * Constructor containing name of Campground
+     * @param name String value of campground name
+     */
     public Campground(String name)
     {
         this.name = name;
     }
 
-    public Campground(int id)
+    /**
+     * Constructor containing id of campground
+     * @param campgroundId int value for campground id
+     */
+    public Campground(int campgroundId)
     {
-        this.id = id;
+        this.id = campgroundId;
     }
 
 

@@ -10,6 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * CampsiteService class which provides most database functionality
+ * for the Campsites table
+ *
+ * @author Paul Woods
+ * @version 0.1
+ */
+
 @Service
 public class CampsiteService {
 
@@ -18,8 +26,8 @@ public class CampsiteService {
 
     /**
      * Constructor for interface CampsiteService
-     * @param campgroundRepo
-     * @param campsiteRepo
+     * @param campgroundRepo ICampgroundRepository object
+     * @param campsiteRepo ICampsiteRepository object
      */
     public CampsiteService(ICampgroundRepository campgroundRepo,ICampsiteRepository campsiteRepo)
     {
@@ -29,7 +37,7 @@ public class CampsiteService {
 
     /**
      * Return a specific campsite by campsiteId
-     * @param campsiteId
+     * @param campsiteId int value of Campsite id
      * @return Campsite object w/ this campsiteId
      */
     public Campsite getCampsiteById(@PathVariable int campsiteId)

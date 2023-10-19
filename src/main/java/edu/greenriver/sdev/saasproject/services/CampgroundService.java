@@ -3,11 +3,17 @@ package edu.greenriver.sdev.saasproject.services;
 import edu.greenriver.sdev.saasproject.db.ICampgroundRepository;
 import edu.greenriver.sdev.saasproject.models.Campground;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This class is the CampgroundService, and does the majority of the database work,
+ * especially wrt to the Campground table.
+ *
+ * @author Paul Woods
+ * @version 0.1
+ */
 @Service
 public class CampgroundService {
 
@@ -16,7 +22,7 @@ public class CampgroundService {
     /**
      * Constructor that takes in ICampgroundRepository repo
      *
-     * @param repo
+     * @param repo ICampgroundRepository object
      */
     public CampgroundService(ICampgroundRepository repo) {
         this.repo = repo;
@@ -34,11 +40,11 @@ public class CampgroundService {
     /**
      * Retrieves the Campground w/ given int it
      *
-     * @param id int value indicating Campground id
+     * @param campgroundId int value indicating Campground id
      * @return Campground object w/ given int id
      */
-    public Campground getCampgroundById(int id) {
-        Optional<Campground> found = repo.findById(id);
+    public Campground getCampgroundById(int campgroundId) {
+        Optional<Campground> found = repo.findById(campgroundId);
         return found.orElse(null);
     }
 
@@ -61,7 +67,9 @@ public class CampgroundService {
      *
      * @param campgroundId int id of Campground to delete
      */
-    public void deleteCampgroundById(int campgroundId) {
+    public void deleteCampgroundById(int campgroundId)
+    {
+        System.out.println("deleteCampgroundById: " + campgroundId);
         repo.deleteById(campgroundId);
     }
 

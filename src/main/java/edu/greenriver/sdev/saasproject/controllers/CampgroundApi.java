@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 /**
  * This class presents public API endpoints through Spring and handles these
  * calls by using CampgroundService
+ *
+ * @author Paul Woods
+ * @version 0.1
  */
 @RestController
 public class CampgroundApi {
@@ -23,7 +25,8 @@ public class CampgroundApi {
 
     /**
      * Constructor that takes a campgroundService object
-     * @param campgroundService
+     * @param campgroundService Campground db access
+     * @param campsiteService Campsite db access
      */
     public CampgroundApi(CampgroundService campgroundService, CampsiteService campsiteService) {
         this.campgroundService = campgroundService;
@@ -44,8 +47,8 @@ public class CampgroundApi {
 
     /**
      * GET mapping to return a specific Campground by id
-     * @param campgroundId
-     * @return
+     * @param campgroundId int id of campground
+     * @return ResponseEntity containing object
      */
     @GetMapping("campgrounds/{campgroundId}")
     public ResponseEntity<Campground> getCampgroundById(@PathVariable int campgroundId)
@@ -83,12 +86,14 @@ public class CampgroundApi {
     /**
      * DELETE mapping to delete a Campground from the database
      * @param campground Campground to delete
+     * @return ResponseEntity(void), used to return HTTP status codes
      */
     @DeleteMapping("campgrounds")
     public ResponseEntity<Void> deleteCampground(@RequestBody Campground campground)
     {
-        //  System.out.println("Deleting a campground");
-        //  System.out.println("Received campground with ID: " + campground.getId());
+        System.out.println("Deleting a campground");
+        System.out.println("Received campground with ID: " + campground.getId());
+
         campgroundService.deleteCampgroundById(campground.getId());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
@@ -115,6 +120,7 @@ public class CampgroundApi {
 
     /**
      * Returns a Campsite given its ID value
+     * @param campgroundId int id of campground this campsite pertains to
      * @param campsiteId ID of campsite to return,
      * @return Campsite with matching ID
      */
