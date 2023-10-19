@@ -33,6 +33,11 @@ public class Campground {
         this.name = name;
     }
 
+    public Campground(int id)
+    {
+        this.id = id;
+    }
+
 
 
 }

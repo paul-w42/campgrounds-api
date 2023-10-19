@@ -3,7 +3,9 @@ package edu.greenriver.sdev.saasproject.services;
 import edu.greenriver.sdev.saasproject.db.ICampgroundRepository;
 import edu.greenriver.sdev.saasproject.models.Campground;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -11,23 +13,79 @@ public class CampgroundService {
 
     ICampgroundRepository repo;
 
-    public CampgroundService(ICampgroundRepository repo)
-    {
+    /**
+     * Constructor that takes in ICampgroundRepository repo
+     *
+     * @param repo
+     */
+    public CampgroundService(ICampgroundRepository repo) {
         this.repo = repo;
     }
 
-//    public Campground getCampgroundByName(String name)
-//    {
-//        //Optional<Campground> found = repo.findByName(name);
-//    }
+    /**
+     * Returns a list of all campgrounds
+     *
+     * @return List of Campground objects
+     */
+    public List<Campground> getAllCampgrounds() {
+        return repo.findAll();
+    }
 
-
-    /*
-    public Joke getJokeById(int id)
-    {
-        //the filter() method receives a lambda method
-        Optional<Joke> found = repo.findById(id);
+    /**
+     * Retrieves the Campground w/ given int it
+     *
+     * @param id int value indicating Campground id
+     * @return Campground object w/ given int id
+     */
+    public Campground getCampgroundById(int id) {
+        Optional<Campground> found = repo.findById(id);
         return found.orElse(null);
     }
-    */
+
+    /**
+     * Adds a Campground to the database
+     *
+     * @param campground Campground to add to database
+     * @return Campground object added to database including id
+     */
+    public Campground addCampground(Campground campground) {
+        // insert the record
+        campground = repo.save(campground);
+
+        // return the campground w/ new id
+        return campground;
+    }
+
+    /**
+     * Delete Campground by id
+     *
+     * @param campgroundId int id of Campground to delete
+     */
+    public void deleteCampgroundById(int campgroundId) {
+        repo.deleteById(campgroundId);
+    }
+
+    /**
+     * Updates a Campground
+     * @param updatedCampground Campground information to update with
+     * @return updated Campground object from database
+     */
+    public Campground updateCampground(Campground updatedCampground)
+    {
+        Campground savedCampground = getCampgroundById(updatedCampground.getId());
+
+        savedCampground.setTentOnlySites(updatedCampground.getTentOnlySites());
+        savedCampground.setTotalCampsites(updatedCampground.getTotalCampsites());
+        savedCampground.setUrl(updatedCampground.getUrl());
+        savedCampground.setLatitude(updatedCampground.getLatitude());
+        savedCampground.setLongitude(updatedCampground.getLongitude());
+        savedCampground.setName(updatedCampground.getName());
+
+        // save changes to Campground in the db
+        savedCampground = repo.save(savedCampground);
+
+        return savedCampground;
+    }
+
+
 }

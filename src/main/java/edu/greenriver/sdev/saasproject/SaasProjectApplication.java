@@ -266,6 +266,7 @@ public class SaasProjectApplication {
             campsiteRepo.save(site);
         }
 
+        System.out.println("Finished adding campgrounds & campsites to db");
 
     }
 
