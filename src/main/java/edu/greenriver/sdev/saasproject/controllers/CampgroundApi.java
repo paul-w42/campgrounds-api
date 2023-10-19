@@ -95,9 +95,17 @@ public class CampgroundApi {
      * @return Campsite with matching ID
      */
     @GetMapping("campgrounds/{campgroundId}/campsites/{campsiteId}")
-    public Campsite getCampsiteById(@PathVariable int campsiteId)
+    public ResponseEntity<Campsite> getCampsiteById(@PathVariable int campgroundId, @PathVariable int campsiteId)
     {
-        return campsiteService.getCampsiteById(campsiteId);
+        Campsite campsite = campsiteService.getCampsiteById(campsiteId);
+        if (campsite.getCampground().getId() != campgroundId)
+        {
+            return new ResponseEntity<>(null, HttpStatus.resolve(400));
+        }
+        else
+        {
+            return new ResponseEntity<>(campsite, HttpStatus.OK);
+        }
     }
 
     /**
@@ -122,7 +130,6 @@ public class CampgroundApi {
     public ResponseEntity<Campsite> addCampsite(
             @PathVariable int campgroundId, @RequestBody Campsite campsite)
     {
-
         return new ResponseEntity<>(
                 campsiteService.addCampsite(campsite, campgroundId), HttpStatus.CREATED);
     }
@@ -138,8 +145,8 @@ public class CampgroundApi {
     {
         if (campgroundId != campsite.getCampground().getId())
         {
-//            System.out.println("PathVariable ID: " + campgroundId);
-//            System.out.println("Campground ID: " + campsite.getCampground().getId());
+            //  System.out.println("PathVariable ID: " + campgroundId);
+            //  System.out.println("Campground ID: " + campsite.getCampground().getId());
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
@@ -159,9 +166,9 @@ public class CampgroundApi {
     {
         if (campgroundId != campsite.getCampground().getId())
         {
-//            System.out.println("PathVariable ID: " + campgroundId);
-//            System.out.println("Campground ID: " + campsite.getCampground().getId());
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            //  System.out.println("PathVariable ID: " + campgroundId);
+            //  System.out.println("Campground ID: " + campsite.getCampground().getId());
+            return new ResponseEntity<>(null, HttpStatus.resolve(400));
         }
         else
         {
@@ -170,34 +177,5 @@ public class CampgroundApi {
         }
 
     }
-
-/*
-    @PutMapping("campgrounds")
-    public Campground editCampground(@RequestBody Campground campground)
-    {
-        return campgroundService.updateCampground(campground);
-    }
-
-    @PostMapping("campgrounds")
-    public ResponseEntity<Campground> addCampground(@RequestBody Campground campground)
-    {
-        return new ResponseEntity<>(
-                campgroundService.addCampground(campground),HttpStatus.CREATED);
-    }
-
-    @GetMapping("campgrounds")
-    public ResponseEntity<List<Campground>> allCampgrounds()
-    {
-        return new ResponseEntity<List<Campground>>(
-                campgroundService.getAllCampgrounds(), HttpStatus.OK);
-    }
-
-    @GetMapping("campgrounds/{campgroundId}")
-    public Campground getCampgroundById(@PathVariable int campgroundId)
-    {
-        return campgroundService.getCampgroundById(campgroundId);
-    }
-
- */
 
 }
