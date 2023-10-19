@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "e042e04c-be55-422a-9819-7e8de73d3ab4",
+		"name": "Campgrounds & Campsites",
+		"description": "This API collection enables the creation, updating, retrieval, and deletion of Camgrounds and Campsites. Campsite operations are limited on a Campground specific basis.\n\n**Author:** Paul Woods  \n**Class:** 372  \n**Quarter:** Fall 2023 Quarter\n\nEndpoints:\n\n- /campgrounds - access campgrounds\n- /campgrounds/{campground_id}/campsites - access campsites for a campground particular campground. The {campground_id} is compared in many cases to the campground id located inside the Campsite object. If they do not match, an error will be returned.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30297505"
+	},
+	"item": [
+		{
+			"name": "Campgrounds",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/campgrounds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds"
+					]
+				},
+				"description": "Retrieves a List of Campgrounds.\n\nResponses:\n\n- 200 (OK) - List of Campgrounds returned"
+			},
+			"response": []
+		},
+		{
+			"name": "Campground ID 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/campgrounds/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds",
+						"2"
+					]
+				},
+				"description": "Retrieves a Campground by its ID\n\nResponses:\n\n- 200 (OK) - Campground found and returned\n    \n- 400 (NOT FOUND) - Campground was not found"
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Campground",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Fort Ebey State Park\",\n    \"url\": \"https://www.parks.wa.gov/507/Fort-Ebey\",\n    \"latitude\": 48.22332350875604,\n    \"longitude\": -122.75769022007823,\n    \"tentOnlySites\": 1,\n    \"totalCampsites\": 50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/campgrounds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds"
+					]
+				},
+				"description": "Adds a Campground to the database. The name field is required.\n\nResponses:\n\n- 201 (CREATED) - Campground was successfully created\n- 204 (NO CONTENT) - The Campground object is empty, or missing a name field."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Campground ID 6",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"6\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/campgrounds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds"
+					]
+				},
+				"description": "Deletes a Campground from the database. Takes the ID of the Campground to delete. A non-existent ID will result in a silent failure.\n\nResponses:\n\n- 200 (OK)"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Campground (ID 5)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id\": \"5\",\n        \"name\": \"Teannaway Campground\",\n        \"url\": \"https://www.dnr.wa.gov/Teanaway\",\n        \"latitude\": 46.28333266,\n        \"longitude\": -124.055996,\n        \"tentOnlySites\": 0,\n        \"totalCampsites\": 50\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/campgrounds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds"
+					]
+				},
+				"description": "Updates a Campground with new name, url, latitude, longitude, number of tentOnlySites, and totalCampsites.\n\nResponses:\n\n- 200 (OK) - Campsite was successfully updated\n    \n- 204 (NO CONTENT) - Campsite was missing a name field"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campsites (CG id=2)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/campgrounds/2/campsites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds",
+						"2",
+						"campsites"
+					]
+				},
+				"description": "Returns a list of campsites for the given path variable Campground_ID\n\nResponses:\n\n- 200 (OK) - returns a list of Campsites for the given campground\n- 404 (NOT FOUND) - no campsites were found for this campground"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Campsite (id=26)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 26,\n    \"campground\": {\n        \"id\": 2,\n        \"name\": \"Fort Worden State Park\",\n        \"url\": \"https://www.parks.wa.gov/511/Fort-Worden\",\n        \"latitude\": 48.1347478,\n        \"longitude\": -122.7685142,\n        \"tentOnlySites\": 0,\n        \"totalCampsites\": 80\n    },\n    \"campsiteNumber\": \"1\",\n    \"maxTrailerLength\": 0,\n    \"tentPadPresent\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/campgrounds/2/campsites/26",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds",
+						"2",
+						"campsites",
+						"26"
+					]
+				},
+				"description": "Returns a Campsite with a given ID. The Campground_ID PATH Parameter must match the Campsite Campground ID\n\nResponses:\n\n- 200 (OK) - Campsite is returned\n- 400 (BAD REQUEST) - PATH Variable Campground_ID and the Campground inside the Campsite object are mismatched."
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Campsite (to CG 2)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"campsiteNumber\": \"50\",\n    \"maxTrailerLength\": 0,\n    \"tentPadPresent\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/campgrounds/2/campsites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds",
+						"2",
+						"campsites"
+					]
+				},
+				"description": "Adds a Campsite to a to the database for the campground with the given Path Variable. A Campsite Number is required, otherwise a 204 NO CONTENT is returned.\n\nResponses;\n\n- 200 (OK) - Campsite was successfully added to the database\n    \n- 204 (NO CONTENT) - Campsite Name was missing, nothing was added to the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Campsite (CG 2)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 26,\n    \"campground\": {\n        \"id\": 2,\n        \"name\": \"Fort Worden State Park\",\n        \"url\": \"https://www.parks.wa.gov/511/Fort-Worden\",\n        \"latitude\": 48.1347478,\n        \"longitude\": -122.7685142,\n        \"tentOnlySites\": 0,\n        \"totalCampsites\": 80\n    },\n    \"campsiteNumber\": \"1\",\n    \"maxTrailerLength\": 45,\n    \"tentPadPresent\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/campgrounds/2/campsites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds",
+						"2",
+						"campsites"
+					]
+				},
+				"description": "Updates a Campsite in the database.\n\nResponses:\n\n- 200 (OK) - Campsite successfully updated\n    \n- 404 (NOT FOUND) - Campsite not found or updated"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Campsite (ID=50, CG 2)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 50,\n    \"campground\": {\n        \"id\": 2,\n        \"name\": \"Fort Worden State Park\",\n        \"url\": \"https://www.parks.wa.gov/511/Fort-Worden\",\n        \"latitude\": 48.1347478,\n        \"longitude\": -122.7685142,\n        \"tentOnlySites\": 0,\n        \"totalCampsites\": 80\n    },\n    \"campsiteNumber\": \"25\",\n    \"maxTrailerLength\": 0,\n    \"tentPadPresent\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/campgrounds/2/campsites",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"campgrounds",
+						"2",
+						"campsites"
+					]
+				},
+				"description": "Deletes the given campsite from the database. It is required for security purposes that the Campground Path variable value match the Campground ID of the Campsite to be deleted.\n\nResponses:\n\n- 200 (OK) - Campsite successfully deleted\n    \n- 400 (BAD REQUEST) - Campsite Campground ID does not match Campground ID Path Variable"
+			},
+			"response": []
+		}
+	]
+}

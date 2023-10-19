@@ -37,7 +37,7 @@ public class CampgroundApi {
     @GetMapping("campgrounds")
     public ResponseEntity<List<Campground>> allCampgrounds()
     {
-        System.out.println("returning list of campgrounds");
+        //  System.out.println("returning list of campgrounds");
         return new ResponseEntity<List<Campground>>(
                 campgroundService.getAllCampgrounds(), HttpStatus.OK);
     }
@@ -48,9 +48,18 @@ public class CampgroundApi {
      * @return
      */
     @GetMapping("campgrounds/{campgroundId}")
-    public Campground getCampgroundById(@PathVariable int campgroundId)
+    public ResponseEntity<Campground> getCampgroundById(@PathVariable int campgroundId)
     {
-        return campgroundService.getCampgroundById(campgroundId);
+        Campground campground = campgroundService.getCampgroundById(campgroundId);
+
+        if (campground != null)
+        {
+            return new ResponseEntity<>(campground, HttpStatus.OK);
+        }
+        else
+        {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     /**
@@ -61,7 +70,12 @@ public class CampgroundApi {
     @PostMapping("campgrounds")
     public ResponseEntity<Campground> addCampground(@RequestBody Campground campground)
     {
-//        System.out.println("Adding a campground");
+        if (campground.getName().isEmpty())
+        {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+
+        //  System.out.println("Adding a campground");
         return new ResponseEntity<>(
                 campgroundService.addCampground(campground),HttpStatus.CREATED);
     }
@@ -71,11 +85,12 @@ public class CampgroundApi {
      * @param campground Campground to delete
      */
     @DeleteMapping("campgrounds")
-    public void deleteCampground(@RequestBody Campground campground)
+    public ResponseEntity<Void> deleteCampground(@RequestBody Campground campground)
     {
-//        System.out.println("Deleting a campground");
-//        System.out.println("Received campground with ID: " + campground.getId());
+        //  System.out.println("Deleting a campground");
+        //  System.out.println("Received campground with ID: " + campground.getId());
         campgroundService.deleteCampgroundById(campground.getId());
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     /**
@@ -84,9 +99,18 @@ public class CampgroundApi {
      * @return Campground object representing updated campground
      */
     @PutMapping("campgrounds")
-    public Campground editCampground(@RequestBody Campground campground)
+    public ResponseEntity<Campground> editCampground(@RequestBody Campground campground)
     {
-        return campgroundService.updateCampground(campground);
+        if (campground.getName().isEmpty())
+        {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+        else
+        {
+            campground = campgroundService.updateCampground(campground);
+            return new ResponseEntity<>(campground, HttpStatus.OK);
+        }
+
     }
 
     /**
@@ -98,6 +122,9 @@ public class CampgroundApi {
     public ResponseEntity<Campsite> getCampsiteById(@PathVariable int campgroundId, @PathVariable int campsiteId)
     {
         Campsite campsite = campsiteService.getCampsiteById(campsiteId);
+
+        System.out.println("Campsite.Campground.id = " + campsite.getCampground().getId());
+
         if (campsite.getCampground().getId() != campgroundId)
         {
             return new ResponseEntity<>(null, HttpStatus.resolve(400));
@@ -116,8 +143,16 @@ public class CampgroundApi {
     @GetMapping("campgrounds/{campgroundId}/campsites")
     public ResponseEntity<List<Campsite>> campsitesByCampground(@PathVariable int campgroundId)
     {
-        return new ResponseEntity<List<Campsite>>(
-            campsiteService.getCampsitesByCampground(campgroundId), HttpStatus.OK);
+        List<Campsite> campsites = campsiteService.getCampsitesByCampground(campgroundId);
+
+        if (campsites == null)
+        {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        else
+        {
+            return new ResponseEntity<List<Campsite>>(campsites, HttpStatus.OK);
+        }
     }
 
     /**
@@ -130,8 +165,15 @@ public class CampgroundApi {
     public ResponseEntity<Campsite> addCampsite(
             @PathVariable int campgroundId, @RequestBody Campsite campsite)
     {
-        return new ResponseEntity<>(
-                campsiteService.addCampsite(campsite, campgroundId), HttpStatus.CREATED);
+        if (campsite.getCampsiteNumber() == null || campsite.getCampsiteNumber().isEmpty())
+        {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+        else
+        {
+            return new ResponseEntity<>(
+                    campsiteService.addCampsite(campsite, campgroundId), HttpStatus.CREATED);
+        }
     }
 
     /**

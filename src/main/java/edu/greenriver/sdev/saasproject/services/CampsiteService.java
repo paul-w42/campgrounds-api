@@ -48,6 +48,7 @@ public class CampsiteService {
     {
         Optional<Campground> found = campgroundRepo.findById(campgroundId);
 
+        // if campground exists
         if (found.isPresent())
         {
             return campsiteRepo.findAllByCampground(found.get());

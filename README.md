@@ -4,6 +4,9 @@ This is the repository for the SDEV372 SaaS project.
 
 ![Picture of a Tent](./src/main/resources/static/images/tent-640.png "Tent Camping image")
 
+[Link to API Documentation (Postman)](https://documenter.getpostman.com/view/30297505/2s9YR9YsJw)
+
+[Exported Postman JSON file - CampgroundsCampsites-Postman.json](CampgroundsCampsites-Postman.json) 
 
 ## Project Properties
 
