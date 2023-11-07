@@ -1,0 +1,114 @@
+/*https://www.w3schools.com/cssref/css_default_values.php*/
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    background-color: #F1E5CF;
+    /*border: 2px solid purple;*/
+}
+
+h2 {
+    background-color: #997e57;
+    /*background-color: #FEB456;*/
+    padding: 3px 10px;
+    border-radius: 7px;
+    color: white;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+div#container {
+    display: grid;
+}
+
+table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 15px auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+table th {
+    text-align: left;
+    font-size: 1.2em;
+    border: 1px solid black;
+    padding: 3px 6px;
+    background-color: #a2a78b;
+}
+
+table td {
+    font-size: 1.1em;
+    border: 1px solid black;
+    padding: 4px 5px;
+    /*background-color: #F9FAD7;*/
+}
+
+table tr:nth-child(even) {
+    background-color: #EFEFEC;
+}
+
+a {
+    color: #606600;
+}
+
+a.menuLinks {
+    font-size: 1.1em;
+}
+
+div.menuLinks {
+    padding: 25px 0;
+}
+
+div#form {
+    width: 25em;
+    border: 1px solid black;
+    padding: 0 15px 15px;
+    border-radius: 7px;
+    display: none;
+    margin-top: 25px;
+    background-color: white;
+}
+
+div#form label {
+    font-weight: bold;
+    /*font-size: 0.9em;*/
+}
+
+input {
+/*div#form input {*/
+    display: block;
+    padding: 4px;
+    border: 1px solid darkgray;
+    background-color: #F5F5F5;
+    font-size: 0.9em;
+}
+
+#addCampgroundButton {
+    margin-top: 0.75em;
+    font-size: 1.1em;
+    padding: 5px 11px;
+}
+
+dialog {
+    border-radius: 8px;
+}
+
+dialog span#delName {
+    font-weight: bold;
+}
+
+dialog button {
+    padding: 3px 5px;
+    margin-top: 10px;
+    margin-right: 15px;
+    font-size: 1em;
+}

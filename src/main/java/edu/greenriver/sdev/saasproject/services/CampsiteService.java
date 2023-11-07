@@ -114,6 +114,7 @@ public class CampsiteService {
         return savedCampsite;
     }
 
+
     /**
      * Remove the campsite with the given ID
      * @param campsiteId
@@ -122,6 +123,18 @@ public class CampsiteService {
     {
         campsiteRepo.deleteById(campsiteId);
     }
+
+    // TODO - TEST
+    public void deleteByCampground(Campground campground)
+    {
+        campsiteRepo.deleteByCampground(campground);
+    }
+
+//    // TODO - TEST
+//    public void deleteByCampgroundId(Integer id)
+//    {
+//        campsiteRepo.deleteByCamggroundId(id);
+//    }
 
     /*
         public void deleteCampgroundById(int campgroundId) {

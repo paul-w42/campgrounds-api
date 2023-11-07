@@ -4,6 +4,7 @@ import edu.greenriver.sdev.saasproject.models.Campground;
 import edu.greenriver.sdev.saasproject.models.Campsite;
 import edu.greenriver.sdev.saasproject.services.CampgroundService;
 import edu.greenriver.sdev.saasproject.services.CampsiteService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.List;
  * @version 0.1
  */
 @RestController
+@RequestMapping("api/v1")
 public class CampgroundApi {
 
     private CampgroundService campgroundService;
@@ -73,28 +75,36 @@ public class CampgroundApi {
     @PostMapping("campgrounds")
     public ResponseEntity<Campground> addCampground(@RequestBody Campground campground)
     {
+
         if (campground.getName().isEmpty())
         {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
 
-        //  System.out.println("Adding a campground");
+        //System.out.println("Adding a campground");
+
         return new ResponseEntity<>(
                 campgroundService.addCampground(campground),HttpStatus.CREATED);
     }
 
     /**
      * DELETE mapping to delete a Campground from the database
+     * Called by modal dialog confirming deleting of campground/campsites
      * @param campground Campground to delete
      * @return ResponseEntity(void), used to return HTTP status codes
      */
+    @Transactional
     @DeleteMapping("campgrounds")
     public ResponseEntity<Void> deleteCampground(@RequestBody Campground campground)
     {
         System.out.println("Deleting a campground");
         System.out.println("Received campground with ID: " + campground.getId());
 
+        //campsiteService.getCampsitesByCampground(campground.getId());
+        //campgroundService.deleteCampgroundById(campground.getId());
+        campsiteService.deleteByCampground(campground);
         campgroundService.deleteCampgroundById(campground.getId());
+
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 

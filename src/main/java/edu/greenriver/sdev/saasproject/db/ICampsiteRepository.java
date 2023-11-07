@@ -10,14 +10,13 @@ public interface ICampsiteRepository extends JpaRepository<Campsite, Integer> {
 
     /**
      * Find all campsites in a specific campground
-     * @param campgroundId
+     * @param campground
      * @return List of Campsites
      */
     List<Campsite> findAllByCampground(Campground campground);
 
+    void deleteByCampground(Campground campground);
 
-    // DID NOT WORK - Exception
-    //List<Campsite> findAllByCampground(int campgroundId);
-
+//    void deleteByCamggroundId(Integer id);
 
 }
