@@ -25,7 +25,7 @@ window.onload = async function () {
 
 function displayHideCampgroundForm()
 {
-    console.log("displayAddCampground() called");
+    //console.log("displayAddCampground() called");
     // span.style.display
     let addCampgroundForm = document.querySelector("#form");
     if (addCampgroundForm.style.display === 'grid') {
@@ -56,8 +56,6 @@ async function addCampground(event)
         totalCampsites: `${numCampsites}`
     }
 
-    //console.log("Campsite Object: " + campObj);
-
     // Build Request including body
     let uri = "http://localhost:8080/api/v1/campgrounds";
     let config = {  // http headers
@@ -68,21 +66,28 @@ async function addCampground(event)
         body: JSON.stringify(campObj),
     }
 
-    //console.log("config: " + config);
-
     // perform POST, await response
     let response = await fetch(uri, config);
 
     // convert the body of the response to JSON format
     let json = await response.json();
 
-    //console.log("Response from server: " + json);
-    console.log("numCampsites: " + json.totalCampsites);
-
     // query table/container
     let section = document.querySelector("#container");
     addCampgroundRow(json, section);
 
+    // hide form
+    displayHideCampgroundForm();
+    clearInputValues();
+}
+
+function clearInputValues()
+{
+    document.querySelector("input#name").value = "";
+    document.querySelector("input#campsites").value = "";
+    document.querySelector("input#lat").value = "";
+    document.querySelector("input#lon").value = "";
+    document.querySelector("input#url").value = "";
 }
 
 async function fetchCampgrounds()     // async required for await keyword below
@@ -115,6 +120,15 @@ function addItemsTable(campgroundsArray)
     }
 }
 
+// helper function for addCampgroundRow that appends two spans to td
+function buildColumnChildren(child1, child2)
+{
+    let td = document.createElement("td");
+    td.appendChild(child1);
+    td.appendChild(child2);
+    return td;
+}
+
 /*
  * builds row/columns to display tabular data
  * spanX1 is normal view/display of data
@@ -125,62 +139,51 @@ function addCampgroundRow(campground, section)
     // create HTML elements
     let tr = document.createElement("tr")
 
-    // IDz
+    // IDs
     let td1 = document.createElement("td");
 
     // Campground Name
-    let td2 = document.createElement("td");
     let span21 = document.createElement("span");
     let span22 = document.createElement("span");
     span21.id = `d${campground.id}2`;
     span22.id = `e${campground.id}2`;
     span22.style.display = "none";
-    td2.appendChild(span21);
-    td2.appendChild(span22);
+    let td2 = buildColumnChildren(span21, span22);
 
     // Num Campsites
-    let td3 = document.createElement("td");
     let span31 = document.createElement("span");
     let span32 = document.createElement("span");
     span31.id = `d${campground.id}3`;
     span32.id = `e${campground.id}3`;
     span32.style.display = "none";
-    td3.appendChild(span31);
-    td3.appendChild(span32);
+    let td3 = buildColumnChildren(span31, span32);
 
     // Latitude
-    let td4 = document.createElement("td");
     let span41 = document.createElement("span");
     let span42 = document.createElement("span");
     span41.id = `d${campground.id}4`;
     span42.id = `e${campground.id}4`;
     span42.style.display = "none";
-    td4.appendChild(span41);
-    td4.appendChild(span42);
+    let td4 = buildColumnChildren(span41, span42);
 
     // Longitude
-    let td5 = document.createElement("td");
     let span51 = document.createElement("span");
     let span52 = document.createElement("span");
     span51.id = `d${campground.id}5`;
     span52.id = `e${campground.id}5`;
     span52.style.display = "none";
-    td5.appendChild(span51);
-    td5.appendChild(span52);
+    let td5 = buildColumnChildren(span51, span52);
 
     // URL
-    let td6 = document.createElement("td"); // url
     let span61 = document.createElement("span");
     let span62 = document.createElement("span");
     let a6= document.createElement("a");
     span61.id = `d${campground.id}6`;   // d - data
     span62.id = `e${campground.id}6`;   // e - edit
     span62.style.display = "none";
-    td6.appendChild(span61);
-    td6.appendChild(span62);
+    let td6 = buildColumnChildren(span61, span62);
 
     // Edit
-    let td7 = document.createElement("td"); // edit
     let span71 = document.createElement("span");
     let span72 = document.createElement("span");
     let a7Edit = document.createElement("a");
@@ -189,19 +192,16 @@ function addCampgroundRow(campground, section)
     span71.id = `d${campground.id}7`;
     span72.id = `e${campground.id}7`;
     span72.style.display = "none";
-    td7.appendChild(span71);
-    td7.appendChild(span72);
+    let td7 = buildColumnChildren(span71, span72);
 
     // Delete
-    let td8 = document.createElement("td"); // delete
     let span81 = document.createElement("span");
     let span82 = document.createElement("span");
     let a8Delete = document.createElement("a");
     span81.id = `d${campground.id}8`;
     span82.id = `e${campground.id}8`;
     span82.style.display = "none";
-    td8.appendChild(span81);
-    td8.appendChild(span82);
+    let td8 = buildColumnChildren(span81, span82);
 
     // assign unique id to this row, attribute name is 'data-id'
     tr.dataset.id = campground.id;

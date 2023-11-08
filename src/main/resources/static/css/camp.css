@@ -10,12 +10,10 @@ body {
     margin: 0 auto;
     font-family: sans-serif;
     background-color: #F1E5CF;
-    /*border: 2px solid purple;*/
 }
 
 h2 {
     background-color: #997e57;
-    /*background-color: #FEB456;*/
     padding: 3px 10px;
     border-radius: 7px;
     color: white;
@@ -54,7 +52,6 @@ table td {
     font-size: 1.1em;
     border: 1px solid black;
     padding: 4px 5px;
-    /*background-color: #F9FAD7;*/
 }
 
 table tr:nth-child(even) {
@@ -72,16 +69,6 @@ a.menuLinks {
 div.menuLinks {
     padding: 25px 0;
 }
-
-/*div#form {*/
-/*    width: 25em;*/
-/*    border: 1px solid black;*/
-/*    padding: 0 15px 15px;*/
-/*    border-radius: 7px;*/
-/*    display: none;*/
-/*    margin-top: 25px;*/
-/*    background-color: white;*/
-/*}*/
 
 div#form {
     display: none;
@@ -111,7 +98,6 @@ input {
 }
 
 #addCampgroundButton {
-    /*margin-top: 0.75em;*/
     font-size: 1.1em;
     padding: 5px 11px;
 }
