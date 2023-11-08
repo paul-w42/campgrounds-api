@@ -28,10 +28,10 @@ function displayHideCampgroundForm()
     console.log("displayAddCampground() called");
     // span.style.display
     let addCampgroundForm = document.querySelector("#form");
-    if (addCampgroundForm.style.display === 'block') {
+    if (addCampgroundForm.style.display === 'grid') {
         addCampgroundForm.style.display = 'none';
     } else {
-        addCampgroundForm.style.display = 'block';
+        addCampgroundForm.style.display = 'grid';
     }
 }
 
@@ -203,9 +203,8 @@ function addCampgroundRow(campground, section)
     td8.appendChild(span81);
     td8.appendChild(span82);
 
-
-    // assign unique id to this row
-    tr.setAttribute('row-id', campground.id);
+    // assign unique id to this row, attribute name is 'data-id'
+    tr.dataset.id = campground.id;
 
     // connect elements to child / insertBefore(), appendChild(), ...
     tr.appendChild(td1);    // id
@@ -310,7 +309,7 @@ function addCampgroundRow(campground, section)
 function showEditCampground(event) {
     event.preventDefault();
     let row = this.closest('tr');
-    let id = row.getAttribute('row-id');
+    let id = row.dataset.id;
     //console.log('editCampgroundClick: ' + id);
 
     // Hide display-only portion of this record, Display edit portion
@@ -330,7 +329,7 @@ function showEditCampground(event) {
 async function saveEditCampground(event) {
     event.preventDefault();
     let row = this.closest('tr');
-    let id = row.getAttribute('row-id');
+    let id = row.dataset.id;
 
     // f23 = f is form, 2 is id of 2nd item, 3 is 3rd field (i.e. campsites)
     let campObj = {
@@ -399,7 +398,7 @@ async function saveEditCampground(event) {
 function cancelEdit(event) {
     event.preventDefault();
     let row = this.closest('tr');
-    let id = row.getAttribute('row-id');
+    let id = row.dataset.id;
 
     // Display display-only portion of this record, Hide edit portion
     for (let i = 2; i < 9; i++) {
@@ -420,7 +419,8 @@ function cancelEdit(event) {
 function showDeleteModal(event) {
     event.preventDefault();
     let row = this.closest('tr');
-    let id = row.getAttribute('row-id');
+    let id = row.dataset.id;
+
     let dialog = document.querySelector("#delDialog");
     let deleteButton = document.querySelector("#confirmDelete");
     let cancelButton = document.querySelector("#cancelDelete");
