@@ -1,68 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Washington Campgrounds</title>
-    <script>
-        const CALLING_PAGE = "load_table";
-    </script>
-    <script src="js/campground_crud.js"></script>
-    <link rel="stylesheet" href="css/camp.css">
+    <title>Campgrounds in Washington</title>
+    <link rel="StyleSheet" type="text/css" href="./css/bulma.css">
+    <link rel="StyleSheet" type="text/css" href="./css/campgrounds.css">
 </head>
-<body>
-<h2>Admin Page - Washington Campgrounds</h2>
+<body class="fullheight">
 
-<table id="container">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Campsites</th>
-        <th>Lat</th>
-        <th>Lon</th>
-        <th>URL</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-</table>
+<div class="container fullheight">
 
-<div id="menuLinks">
-    <a class="menuLinks" id="addCampgroundLink" href="#">Add Campground</a>
-</div>
+    <div class="container has-text-centered fullheight-minus-footer">
+        <div class="is-size-1 has-text-centered mb-3">Campgrounds in Washington</div>
+        <img src="./images/tent-640.png" alt="tent camping" class="is-center mb-3">
 
-<div id="form">
-    <div><h3>Add Campground</h3></div>
-    <div>
-        <label for="name">Campground Name</label>
-        <input type="text" id="name" required name="name" size="30" />
-    </div>
-    <div>
-        <label for="campsites">Num Campsites</label>
-        <input type="text" id="campsites" required name="campsites" size="5" />
-    </div>
-    <div>
-        <label for="lat">Latitude</label>
-        <input type="text" id="lat" name="latitude" size="12" />
-    </div>
-    <div>
-        <label for="lon">Longitude</label>
-        <input type="text" id="lon" name="longitude" size="12" />
-    </div>
-    <div>
-        <label for="url">Website URL</label>
-        <input type="url" id="url" name="url" size="30" />
+        <p>This page will change as updates are made.</p>
+
+
     </div>
 
-<!--    <input id="addCampgroundButton" type="button" value="Add Campground" />-->
-    <div>
-        <button id="addCampgroundButton" >Add Campground</button>
+    <!-- TODO: Change the boundaries for mobile-display vs tablet+
+         when the mobile-view is displayed an extra boundary layer is
+         shown above the menu
+    -->
+
+    <div class="container columns has-text-weight-bold camp-footer">
+        <div class="column has-text-centered is-underlined">View via Map</div>
+        <div class="column has-text-centered is-underlined">View in a List</div>
+        <div class="column has-text-centered is-underlined">Search by Feature</div>
     </div>
 </div>
-
-<dialog id="delDialog">
-    <p>Are you sure you wish to delete campground <span id="delName"></span> from the database?</p>
-
-    <button id="confirmDelete">Delete Campground</button><button id="cancelDelete">Cancel</button>
-</dialog>
-
 </body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Washington Campgrounds</title>
+    <script>
+        const CALLING_PAGE = "load_table";
+    </script>
+    <script src="js/campground_crud.js"></script>
+    <link rel="stylesheet" href="css/camp.css">
+</head>
+<body>
+<h2>Admin Page - Washington Campgrounds</h2>
+
+<table id="container">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Campsites</th>
+        <th>Lat</th>
+        <th>Lon</th>
+        <th>URL</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+</table>
+
+<div id="menuLinks">
+    <a class="menuLinks" id="addCampgroundLink" href="#">Add Campground</a>
+</div>
+
+<div id="form">
+    <div><h3>Add Campground</h3></div>
+    <div>
+        <label for="name">Campground Name</label>
+        <input type="text" id="name" required name="name" size="30" />
+    </div>
+    <div>
+        <label for="campsites">Num Campsites</label>
+        <input type="text" id="campsites" required name="campsites" size="5" />
+    </div>
+    <div>
+        <label for="lat">Latitude</label>
+        <input type="text" id="lat" name="latitude" size="12" />
+    </div>
+    <div>
+        <label for="lon">Longitude</label>
+        <input type="text" id="lon" name="longitude" size="12" />
+    </div>
+    <div>
+        <label for="url">Website URL</label>
+        <input type="url" id="url" name="url" size="30" />
+    </div>
+
+<!--    <input id="addCampgroundButton" type="button" value="Add Campground" />-->
+    <div>
+        <button id="addCampgroundButton" >Add Campground</button>
+    </div>
+</div>
+
+<dialog id="delDialog">
+    <p>Are you sure you wish to delete campground <span id="delName"></span> from the database?</p>
+
+    <button id="confirmDelete">Delete Campground</button><button id="cancelDelete">Cancel</button>
+</dialog>
+
+</body>
+</html>
