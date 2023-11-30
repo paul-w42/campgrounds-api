@@ -52,41 +52,6 @@ window.onload = async function () {
 
 };
 
-// async function checkLoaded() {
-//     if (!pageLoaded) {
-//         console.log("page not loaded, waiting 50ms");
-//         setTimeout(checkLoaded, 50); // Pause for 5 seconds (5000 milliseconds)
-//     }
-// }
-
-/*
- * called from init() function, after google maps have been loaded
- */
-// async function instantiateFields() {
-//
-//     await checkLoaded();
-//
-//     // call fetchCampgrounds
-//     await fetchCampgrounds();
-//     jsonToMapMarkers();
-//
-//     splitViewDiv = document.getElementById("splitView");
-//     splitViewAnchor = document.getElementById("splitViewAnchor");
-//
-//     dataTableDiv = document.getElementById("dataTable");
-//     dataTableTable = document.getElementById("cgTable");
-//     mapContainer = document.getElementById("map_container");
-//
-//     suggestCgAnchor = document.getElementById("suggestCgLink");
-//     suggestCgAnchor.addEventListener('click', showCgSuggestDialog);
-//
-//     splitViewDiv.addEventListener("click", displaySplitView);
-//
-//     // Nov '23
-//     // listener example w/ addListener function - https://developers.google.com/maps/documentation/javascript/events
-//     map.addListener("bounds_changed", getListInView);
-// }
-
 function showCgSuggestDialog() {
 
     let dialog = document.querySelector("#suggestCgDialog");

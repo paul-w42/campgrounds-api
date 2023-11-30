@@ -48,19 +48,16 @@ div#container {
 
 
 div.flex-container a {
-    color: #51382F;   /* fs yellow #F2C67B */
+    color: #51382F;
 }
 
 div.h2 {
     display: flex;
-    /*background-color: #997e57;*/
-    /*background-color: #BABDB6;*/
     background-color: lightgreen;
     padding: 6px 10px;
     border-radius: 7px 7px 0 0;
-    /*color: white;*/
     color: darkgreen;
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-top: 0.5em;
     border-bottom: 0;
 }
@@ -86,17 +83,15 @@ span.h2_3 {
 
 div.h2 a {
     color: black;
-    /*font-weight: bolder;*/
 }
 
 div.h3 {
     display: flex;
     justify-content: flex-end;
-    /*background-color: #F0D5B0;*/
     background-color: #EEEEEE;
     padding: 6px 10px;
     border-radius: 0 0 7px 7px;
-    font-size: 1.3em;
+    font-size: 1.15em;
     border-top: 0;
 }
 
@@ -108,7 +103,7 @@ span.h3_1 {
 div.h3 a {
     color: green;
     font-weight: bolder;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 h3 {
@@ -173,9 +168,8 @@ table th.name {
 }
 
 table td {
-    font-size: 1.25em;
+    font-size: 1.1em;
     padding: 4px 6px;
-    /*     border-bottom: 1px solid black; */
 }
 
 
