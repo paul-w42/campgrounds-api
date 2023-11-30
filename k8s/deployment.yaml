@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: saas-project
-        image: 
+        image: paulwoods42/saas-project
         ports:
         - containerPort: 8080
