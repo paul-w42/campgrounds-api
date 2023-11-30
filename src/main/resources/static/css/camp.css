@@ -86,6 +86,7 @@ span.h2_3 {
 
 div.h2 a {
     color: black;
+    /*font-weight: bolder;*/
 }
 
 div.h3 {
@@ -105,8 +106,9 @@ span.h3_1 {
     margin-right: 0.5em;
 }
 div.h3 a {
-    color: black;
+    color: green;
     font-weight: bolder;
+    font-size: 1.1em;
 }
 
 h3 {
