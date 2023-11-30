@@ -19,8 +19,11 @@ window.onload = async function () {
     // add Event listener to display/hide addCampgroundForm
     let addCampgroundLink = document.querySelector("#addCampgroundLink");
     addCampgroundLink.addEventListener("click", displayHideCampgroundForm);
+    //
+    let viewSuggestedCGsLink = document.querySelector("#viewSuggestedAnchor");
+    viewSuggestedCGsLink.addEventListener("click", viewSuggestedCGs);
 
-    console.log("onload() complete");
+    // console.log("onload() complete");
 };
 
 function displayHideCampgroundForm()
@@ -57,7 +60,7 @@ async function addCampground(event)
     }
 
     // Build Request including body
-    let uri = "http://localhost:8080/api/v1/campgrounds";
+    let uri = "../api/v1/campgrounds";
     let config = {  // http headers
         method: "POST",
         headers: {
@@ -92,7 +95,7 @@ function clearInputValues()
 
 async function fetchCampgrounds()     // async required for await keyword below
 {
-    let uri = "http://localhost:8080/api/v1/campgrounds";
+    let uri = "../api/v1/campgrounds";
     let config = {  // http headers
         method: "get"
     }
@@ -104,7 +107,7 @@ async function fetchCampgrounds()     // async required for await keyword below
 
     addItemsTable(json);
 
-    console.log("fetchCampgrounds() complete");
+    // console.log("fetchCampgrounds() complete");
 }
 
 // Add Records to table
@@ -286,7 +289,10 @@ function addCampgroundRow(campground, section)
     // build anchor for delete
     a8Delete.textContent = 'Delete';
     a8Delete.setAttribute('href', '#');
-    a8Delete.addEventListener("click", showDeleteModal);
+    // a8Delete.addEventListener("click", showDeleteModal);
+    a8Delete.addEventListener("click", (event) => {
+        showDeleteModal(event, true, a8Delete);
+    });
 
     // build anchor for Cancel (edit op)
     a8Cancel.text = 'Cancel';
@@ -342,10 +348,10 @@ async function saveEditCampground(event) {
         totalCampsites: document.getElementById(`f${id}3`).value
     }
 
-    console.log("campObj: " + campObj);
+    //console.log("campObj: " + campObj);
 
     // Build Request including body
-    let uri = "http://localhost:8080/api/v1/campgrounds";
+    let uri = "../api/v1/campgrounds";
     let config = {  // http headers
         method: "PUT",
         headers: {
@@ -354,7 +360,7 @@ async function saveEditCampground(event) {
         body: JSON.stringify(campObj),
     }
 
-    console.log("config: " + config);
+    //console.log("config: " + config);
 
     // perform PUT, await response
     let response = await fetch(uri, config);
@@ -362,8 +368,8 @@ async function saveEditCampground(event) {
     // convert the body of the response to JSON format
     let json = await response.json();
 
-    console.log("Response from Server POST:");
-    console.log(json);
+    //console.log("Response from Server POST:");
+    //console.log(json);
 
     // build anchor for URL column
     let url_anchor= document.createElement("a");
@@ -416,28 +422,48 @@ function cancelEdit(event) {
  *
  * STATUS: WORKING
  */
-function showDeleteModal(event) {
+function showDeleteModal(event, campground, element) {
+    // console.log("this: " + JSON.stringify(this, null, 4));
     event.preventDefault();
-    let row = this.closest('tr');
+    //let row = this.closest('tr');
+    let row = element.closest('tr');
     let id = row.dataset.id;
+
+    // if (campground) {
+    //     console.log("campground id: " + id);
+    // } else {
+    //     console.log("suggestedCampground id: " + id);
+    // }
 
     let dialog = document.querySelector("#delDialog");
     let deleteButton = document.querySelector("#confirmDelete");
     let cancelButton = document.querySelector("#cancelDelete");
 
     dialog.showModal();
-    let campName = document.getElementById(`f${id}2`).value;
-    console.log("Campground Name: " + campName);
+
+    let campName;
+    if (campground) {
+        campName = document.getElementById(`f${id}2`).value;
+    } else {
+        campName = document.getElementById("suggestedCGName").textContent;
+    }
+
+    //console.log("Campground Name: " + campName);
     document.getElementById("delName").textContent = campName;
     //nameSpan.textContent = campName;
 
     deleteButton.addEventListener("click", async () => {
         // Build Request including body
 
-
         let campObj = {id: id};
+        let uri;
 
-        let uri = "http://localhost:8080/api/v1/campgrounds";
+        if (campground) {
+            uri = "../api/v1/campgrounds";
+        } else {
+            uri = "../api/v1/campgrounds/suggested";
+        }
+
         let config = {  // http headers
             method: "DELETE",
             headers: {
@@ -446,18 +472,18 @@ function showDeleteModal(event) {
             body: JSON.stringify(campObj),
         }
 
-        console.log("Config:");
-        console.log(config);
+        // console.log("Config:");
+        // console.log(config);
 
         // perform DELETE, await response
         let response = await fetch(uri, config);
 
         if (response.status === 200) {
-            console.log("DELETED!!!!");
+            // console.log("DELETED!!!!");
             row.remove();
             dialog.close();
-        } else {
-            console.log("NOT DELETED, HTTP Response " + response.status);
+        // } else {
+        //     console.log("NOT DELETED, HTTP Response " + response.status);
         }
 
     });

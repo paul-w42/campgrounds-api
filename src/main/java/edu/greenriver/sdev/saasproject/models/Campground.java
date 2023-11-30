@@ -47,6 +47,10 @@ public class Campground {
         this.id = campgroundId;
     }
 
-
-
+    public Campground(String name, String url, double latitude, double longitude) {
+        this.name = name;
+        this.url = url;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }

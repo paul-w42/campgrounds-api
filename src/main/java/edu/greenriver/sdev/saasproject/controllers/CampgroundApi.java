@@ -2,13 +2,16 @@ package edu.greenriver.sdev.saasproject.controllers;
 
 import edu.greenriver.sdev.saasproject.models.Campground;
 import edu.greenriver.sdev.saasproject.models.Campsite;
+import edu.greenriver.sdev.saasproject.models.SuggestedCampground;
 import edu.greenriver.sdev.saasproject.services.CampgroundService;
 import edu.greenriver.sdev.saasproject.services.CampsiteService;
+import edu.greenriver.sdev.saasproject.services.SuggestedCampgroundService;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,17 +27,23 @@ public class CampgroundApi {
 
     private CampgroundService campgroundService;
     private CampsiteService campsiteService;
+    private SuggestedCampgroundService suggestedCampgroundService;
 
     /**
      * Constructor that takes a campgroundService object
      * @param campgroundService Campground db access
      * @param campsiteService Campsite db access
      */
-    public CampgroundApi(CampgroundService campgroundService, CampsiteService campsiteService) {
+    public CampgroundApi(CampgroundService campgroundService, CampsiteService campsiteService, SuggestedCampgroundService suggested) {
         this.campgroundService = campgroundService;
         this.campsiteService = campsiteService;
+        this.suggestedCampgroundService = suggested;
     }
 
+
+    // ----------------------------------------------------------------------------------
+    // Campground -----------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------
     /**
      * GET mapping to return a List of campgrounds
      * @return List of Campgrounds
@@ -127,6 +136,10 @@ public class CampgroundApi {
         }
 
     }
+
+    // ----------------------------------------------------------------------------------
+    // Campsites ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------
 
     /**
      * Returns a Campsite given its ID value
@@ -234,6 +247,78 @@ public class CampgroundApi {
             return new ResponseEntity<>(null, HttpStatus.OK);
         }
 
+    }
+
+    // ----------------------------------------------------------------------------------
+    // SuggestedCampground --------------------------------------------------------------
+    // ----------------------------------------------------------------------------------
+
+    /**
+     * Return the SuggestedCampground corresponding to the given id value
+     * @param suggestedCampgroundId
+     * @return
+     */
+    @GetMapping("campgrounds/suggested/{suggestedCampgroundId}")
+    public ResponseEntity<SuggestedCampground> getSuggestedCampgroundById(@PathVariable int suggestedCampgroundId)
+    {
+        SuggestedCampground suggestedCampground = suggestedCampgroundService
+                .getSuggestedCampgroundById(suggestedCampgroundId);
+
+        if (suggestedCampground != null)
+        {
+            return new ResponseEntity<>(suggestedCampground, HttpStatus.OK);
+        }
+        else
+        {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * Returns all SuggestedCampgrounds in the database
+     * @return
+     */
+    @GetMapping("campgrounds/suggested")
+    public ResponseEntity<List<SuggestedCampground>> allSuggestedCampgrounds()
+    {
+        return new ResponseEntity<List<SuggestedCampground>>(
+                suggestedCampgroundService.getAllSuggestedCampgrounds(), HttpStatus.OK);
+    }
+
+
+    /**
+     * Delete the SuggestedCampground relevant to the given ID
+     * @param suggestedCampground
+     * @return
+     */
+    @Transactional
+    @DeleteMapping("campgrounds/suggested")
+    public ResponseEntity<Void> deleteSuggestedCampground(@RequestBody SuggestedCampground suggestedCampground)
+    {
+        suggestedCampgroundService.deleteSuggestedCampgroundById(suggestedCampground.getId());
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    /**
+     * Add a SuggestedCampground to the database
+     * @param suggestedCampground
+     * @return
+     */
+    @PostMapping("campgrounds/suggested")
+    public ResponseEntity<SuggestedCampground> addSuggestedCampground(@RequestBody
+                                                                      SuggestedCampground suggestedCampground)
+    {
+        if (suggestedCampground.getName().isEmpty() || suggestedCampground.getUserName().isEmpty())
+        {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+
+        // save current date as DateSuggested
+        LocalDateTime now = LocalDateTime.now();
+        suggestedCampground.setDateSuggested(now);
+
+        return new ResponseEntity<>(
+                suggestedCampgroundService.addSuggestedCampground(suggestedCampground), HttpStatus.CREATED);
     }
 
 }

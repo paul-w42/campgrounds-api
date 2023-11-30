@@ -4,12 +4,27 @@ html {
     box-sizing: border-box;
 }
 
+
 body {
     width: 90%;
-    max-width: 1200px;
     margin: 0 auto;
     font-family: sans-serif;
-    background-color: #F1E5CF;
+    background: linear-gradient(to bottom right, #F3F3F3,#ffffff);
+    min-height: 100vh;
+}
+
+@media (min-width: 2222px) {
+    body {
+        width: 2000px;
+    }
+}
+
+dialog#suggestCgDialog {
+    font-size: 1.1em;
+}
+
+dialog#suggestCgDialog button {
+    font-size: 1.2em;
 }
 
 h2 {
@@ -23,51 +38,159 @@ hr {
     margin: 20px 0;
 }
 
+a {
+    color: forestgreen;
+}
+
 div#container {
     display: grid;
+}
+
+
+div.flex-container a {
+    color: #51382F;   /* fs yellow #F2C67B */
+}
+
+div.h2 {
+    display: flex;
+    /*background-color: #997e57;*/
+    /*background-color: #BABDB6;*/
+    background-color: lightgreen;
+    padding: 6px 10px;
+    border-radius: 7px 7px 0 0;
+    /*color: white;*/
+    color: darkgreen;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    border-bottom: 0;
+}
+
+span.h2_1 {
+    flex: 2 0 300px;
+    font-size: 1.1em;
+    font-weight: bolder;
+}
+
+span.h2_2 {
+    flex: 1 0 auto;
+    align-self: flex-end;
+    text-align: right;
+    margin-right: 3em;
+}
+
+span.h2_3 {
+    flex: 0 0 auto;
+    align-self: flex-end;
+    margin-right:0.5em;
+}
+
+div.h2 a {
+    color: black;
+}
+
+div.h3 {
+    display: flex;
+    justify-content: flex-end;
+    /*background-color: #F0D5B0;*/
+    background-color: #EEEEEE;
+    padding: 6px 10px;
+    border-radius: 0 0 7px 7px;
+    font-size: 1.3em;
+    border-top: 0;
+}
+
+span.h3_1 {
+    flex: 0 0 auto;
+    align-self: flex-end;
+    margin-right: 0.5em;
+}
+div.h3 a {
+    color: black;
+    font-weight: bolder;
 }
 
 h3 {
     margin: 0;
 }
 
-table {
+div#bodyMainContent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.flexBox {
+    flex: 1 0 calc(50% - 10px);
+}
+
+/* small screens display vertically */
+@media screen and (max-width: 750px) {
+    body {
+        width: 100%;
+    }
+    div.flexBox {
+        flex-basis: 100%;
+    }
+}
+
+div#dataTable {
+    display: none;
+    width: calc(50% - 10px);
+    margin-right: 10px;
+}
+
+div#map_container {
+    border: 2px solid black;
+    border-radius: 7px;
+    margin-top: 2em;
+    height: calc(100vh - 200px);
+    width: 100%;
+    right: 0;
+}
+
+table#cgTable {
     width: 100%;
     max-width: 1200px;
-    margin: 15px auto;
+    margin-top: 2em;
+    border: 0;
     border-collapse: collapse;
-    background-color: white;
-    border: 2px solid black;
+    box-shadow: 2px 4px 5px #a2a78b;
 }
 
 table th {
     text-align: left;
     font-size: 1.2em;
-    border: 1px solid black;
-    padding: 3px 6px;
-    background-color: #a2a78b;
+    border-top: 1px solid #BABDB6;
+    border-bottom: 1px solid #BABDB6;
+    /*     padding: 0; */
+    padding: 4px 6px;
+    background-color: #EEEEEE;
+}
+
+table th.name {
+    min-width: 50%;
 }
 
 table td {
-    font-size: 1.1em;
-    border: 1px solid black;
-    padding: 4px 5px;
+    font-size: 1.25em;
+    padding: 4px 6px;
+    /*     border-bottom: 1px solid black; */
 }
+
 
 table tr:nth-child(even) {
     background-color: #EFEFEC;
 }
 
-a {
-    color: forestgreen;
+table#suggestedContainer {
+    display: none;
 }
 
 a.menuLinks {
-    font-size: 1.1em;
+    font-size: 1.4em;
 }
 
-div.menuLinks {
-    padding: 25px 0;
+div#menuLinks {
+    padding: 1.2em 0;
 }
 
 div#form {
@@ -115,4 +238,18 @@ dialog button {
     margin-top: 10px;
     margin-right: 15px;
     font-size: 1em;
+}
+
+dialog h3.dialog {
+    margin-bottom: 15px;
+}
+
+dialog#suggestCgDialog input {
+    margin-bottom: 5px;
+}
+
+span.code {
+    font-family: monospace;
+    font-size: 1.4em;
+    font-weight: bolder;
 }

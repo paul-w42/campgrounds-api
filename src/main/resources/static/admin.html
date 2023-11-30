@@ -2,15 +2,23 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Washington Campgrounds</title>
     <script>
         const CALLING_PAGE = "load_table";
     </script>
     <script src="js/campground_crud.js"></script>
+    <script src="js/campground_suggested.js"></script>
     <link rel="stylesheet" href="css/camp.css">
 </head>
 <body>
-<h2>Admin Page - Washington Campgrounds</h2>
+<!--<h2>Admin Page - Washington Campgrounds</h2>-->
+<div class="h2">
+    <span class="h2_1">Admin Page - Washington Campgrounds</span>
+    <span class="h2_2"><a href="../" target="_blank">View Home Page</a></span>
+    <span class="h2_3"><a id="viewSuggestedAnchor" href="#">View Suggested CGs</a></span>
+<!--    <span class="h2_3"><a href="#">Login</a></span>-->
+</div>
 
 <table id="container">
     <tr>
@@ -24,6 +32,23 @@
         <th>Delete</th>
     </tr>
 </table>
+
+<table id="suggestedContainer">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Campsites</th>
+        <th>Tent Sites</th>
+        <th>Lat</th>
+        <th>Lon</th>
+        <th>URL</th>
+        <th>User</th>
+        <th>Email</th>
+        <th>Date</th>
+        <th></th>
+    </tr>
+</table>
+
 
 <div id="menuLinks">
     <a class="menuLinks" id="addCampgroundLink" href="#">Add Campground</a>
@@ -58,11 +83,14 @@
     </div>
 </div>
 
+<p>Following are currently suggested campgrounds.</p>
+
 <dialog id="delDialog">
     <p>Are you sure you wish to delete campground <span id="delName"></span> from the database?</p>
 
     <button id="confirmDelete">Delete Campground</button><button id="cancelDelete">Cancel</button>
 </dialog>
+
 
 </body>
 </html>

@@ -2,6 +2,7 @@ package edu.greenriver.sdev.saasproject;
 
 import edu.greenriver.sdev.saasproject.db.ICampgroundRepository;
 import edu.greenriver.sdev.saasproject.db.ICampsiteRepository;
+import edu.greenriver.sdev.saasproject.db.ISuggestedCampgroundRepository;
 import edu.greenriver.sdev.saasproject.models.Campground;
 import edu.greenriver.sdev.saasproject.models.Campsite;
 import org.springframework.boot.SpringApplication;
@@ -25,8 +26,85 @@ public class SaasProjectApplication {
                 new Campground("Fort Worden State Park"),
                 new Campground("Cape Disappointment State Park"),
                 new Campground("Salmon La Sac Campground"),
-                new Campground("Teannaway Campground")
-        ));
+                new Campground("Teannaway Campground"),
+                new Campground("Alta Lake State Park",  // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/alta-lake-state-park",
+                        48.0280498, -119.939267),
+                new Campground("Bay View State Park",       // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/bay-view-state-park",
+                        48.487968, -122.479461),
+                new Campground("Beacon Rock State Park",    // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/beacon-rock-state-park",
+                        45.62847, -122.02231),
+                new Campground("Belfair State Park",    // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/belfair-state-park",
+                        47.429748, -122.878157),
+                new Campground("Birch Bay State Park",  // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/birch-bay-state-park",
+                        48.903518, -122.766028),
+                new Campground("Bogachiel State Park",  // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/bogachiel-state-park",
+                        47.894586, -124.36430),
+                new Campground("Bridgeport State Park", // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/bridgeport-state-park",
+                        48.01592, -119.60882),
+                new Campground("Brooks Memorial State Park",
+                        "https://parks.wa.gov/find-parks/state-parks/brooks-memorial-state-park",
+                        45.94997, -120.666147),
+                new Campground("Camano Island State Park",      // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/camano-island-state-park",
+                        48.128244, -122.499185),
+                new Campground("Columbia Hills Historical State Park",  // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/columbia-hills-historical-state-park",
+                        45.643036, -121.106793),
+                new Campground("Conconully State Park",     // location correct
+                        "https://parks.wa.gov/find-parks/state-parks/conconully-state-park",
+                        48.5568, -119.7512),
+                new Campground("Lake Easton State Park",
+                        "https://parks.wa.gov/find-parks/state-parks/lake-easton-state-park",
+                    47.244156, -121.18592),
+                new Campground("Lake Wenatchee State Park",
+                        "https://parks.wa.gov/find-parks/state-parks/lake-wenatchee-state-park",
+                        47.805176, -120.724404),
+                new Campground("Kalaloch Campground",
+                        "https://www.recreation.gov/camping/campgrounds/232464/campsites",
+                        47.61274, -124.374872),
+                new Campground("Grayland Beach State Park",
+                        "https://parks.wa.gov/find-parks/state-parks/grayland-beach-state-park",
+                        46.79324, -124.091674),
+                new Campground("Told-Macdonald Park & Campground",
+                        "https://kingcounty.gov/en/dept/dnrp/nature-recreation/parks-recreation/king-county-parks/parks/tolt-macdonald",
+                        47.64422, -121.92455),
+                new Campground("Wenatchee River County Park",
+                        "https://wenatcheeriverpark.org/",
+                        47.484820, -120.409516),
+                new Campground("Wawawai County Park",
+                        "https://whitmancounty.org/Facilities/Facility/Details/Wawawai-County-Park-8",
+                        46.636015, -117.375073),
+                new Campground("Fort Spokane Campground",
+                        "https://www.recreation.gov/camping/campgrounds/234062",
+                        47.90993, -118.306435),
+                new Campground("Newport / Little Diamond Lake KOA",
+                        "https://koa.com/campgrounds/newport-little-diamond/",
+                    48.14277, -117.22202),
+                new Campground("Dragoon Creek Campground",
+                        "https://www.dnr.wa.gov/Campsites",
+                        47.888134, -117.441746),
+                new Campground("Riverside State Park - Bowl & Pitcher",
+                        "https://parks.wa.gov/find-parks/state-parks/riverside-state-park",
+                        47.69778, -117.495154),
+                new Campground("Lake Spokane Campground",
+                        "https://parks.wa.gov/find-parks/state-parks/riverside-state-park",
+                    47.835836, -117.762496),
+                new Campground("Klipchuck Campground",
+                        "https://www.fs.usda.gov/recarea/okawen/recarea/?recid=59281",
+                        48.598073, -120.513597)
+//                new Campground("",
+//                        "",
+//                        ),
+
+
+                ));
 
         List<Campsite> campsites;
 
@@ -253,8 +331,8 @@ public class SaasProjectApplication {
         Campground teannaway = campgroundRepo.findCampgroundByName("Teannaway Campground");
 
         // Update lat/lon for Teannaway Campground, 47.25839976251815, -120.89602755065299
-        teannaway.setLatitude(46.28333266);
-        teannaway.setLongitude(-124.0559960);
+        teannaway.setLatitude(47.25822);
+        teannaway.setLongitude(-120.89599);
         teannaway.setUrl("https://www.dnr.wa.gov/Teanaway");
         teannaway.setTotalCampsites(55);
         campgroundRepo.save(teannaway);
