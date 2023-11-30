@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saas-project-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      lab: 372-project
+  template:
+    metadata:
+      labels:
+        lab: 372-project
+    spec:
+      containers:
+      - name: saas-project
+        image: 
+        ports:
+        - containerPort: 8080

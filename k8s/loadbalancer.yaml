@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: saas-project-loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 8081
+  selector:
+    lab: 372-project
